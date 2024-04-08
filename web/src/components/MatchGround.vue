@@ -64,7 +64,9 @@ export default {
                 setIntervalId = setInterval(() => {
                     waittime.value = waittime.value + 1;
                 }, 1000)
-
+                // while(store.state.pk.socket == null){
+                //     console.log("using fail, socket is null , please wait ...")
+                // }
                 store.state.pk.socket.send(JSON.stringify({
                     event: "start-matching",
                 }));//有一个api可以向后端发送一个字符串 
@@ -75,7 +77,9 @@ export default {
                 match_btn_info.value = "开始匹配"
                 clearInterval(setIntervalId);
                 waittime.value = 0;
-
+                // while(store.state.pk.socket == null){
+                //     console.log("using fail, socket is null , please wait ...")
+                // }
                 store.state.pk.socket.send(JSON.stringify({
                     event: "stop-matching",
                 }));//有一个api可以向后端发送一个字符串 

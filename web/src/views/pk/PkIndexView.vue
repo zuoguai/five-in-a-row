@@ -43,7 +43,14 @@ export default {
         let setIntervalId = 0;
 
         onMounted(() => {
-            socket = new WebSocket(socketUrl);
+            // while(socket == null){
+                // console.log("create fail, socket is null , please wait ...")
+                socket = new WebSocket(socketUrl);
+            // }
+            console.log(socket)
+            store.commit("updateSocket",
+                socket
+            )
             store.commit("updateOpponent", {
                 opponent_username: "敌人",
                 opponent_photo: "https://cdn.acwing.com/media/article/image/2022/08/09/1_1db2488f17-anonymous.png",
@@ -78,7 +85,7 @@ export default {
 
                     store.commit("updateRating", data.rating);
 
-                    // console.log(data);
+                    console.log(data);
                     store.commit("updateGame", {
                         a_id: data.a_id,
                         b_id: data.b_id,
@@ -92,7 +99,7 @@ export default {
                 } else if (data.event === "move") {
                     const game = store.state.pk.gameObject;
 
-                    // console.log(data);
+                    console.log(data);
                     store.commit("updateStep", {
                         chess_x: data.chess_x,
                         chess_y: data.chess_y,
@@ -112,7 +119,7 @@ export default {
 
                 } else if (data.event === "result") {
                     clearInterval(setIntervalId);
-                    // console.log(data);
+                    console.log(data);
                     store.commit("updateLoser", data.loser)
                     store.commit("updateStatus", "result")
 
